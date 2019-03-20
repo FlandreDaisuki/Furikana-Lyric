@@ -1,0 +1,49 @@
+.tabs {
+    position: relative;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]+label+div {
+    display: none;
+}
+
+input[type="radio"]:checked+label+div {
+    display: block;
+}
+
+label {
+    border: 1px solid black;
+    padding: .5rem;
+    display: inline-block;
+    margin-bottom: -1px;
+    border-radius: 10px 10px 0 0;
+}
+
+input[type="radio"]:checked+label {
+    border-bottom: 1px solid #EEE;
+    background-color: #EEE;
+}
+
+.tab-content {
+    position: absolute;
+    border: 1px solid black;
+    width: 100%;
+    background-color: #EEE;
+    padding: 2px;
+}
+
+pre {
+    margin: 0;
+}
+
+.lyric-row {
+    margin: .5rem 0;
+    font-size: 1.4rem;
+}
+
+.lyric-row:empty {
+    min-height: 1rem;
+}
