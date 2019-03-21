@@ -13,6 +13,19 @@ const $el = (tag, attr = {}, cb = () => {}) => {
   return el;
 };
 
+if (!String.prototype.matchAll) {
+  String.prototype.matchAll = function(regexp) {
+    const self = this;
+    return {
+      *[Symbol.iterator]() {
+        while((matches = regexp.exec(self)) !== null) {
+          yield matches;
+        }
+      }
+    };
+  }
+}
+
 const render = (str, pos) => {
   let result = '';
   for (let i = 0; i < pos.length - 1; ++i) {
