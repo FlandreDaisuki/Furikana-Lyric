@@ -26,6 +26,12 @@ if (!String.prototype.matchAll) {
   }
 }
 
+const getTextArray = () => {
+  return $('#text-editor + label + .tab-content pre').innerHTML
+    .split(/\n|<br\/?>/g)
+    .map(r => r.trim());
+};
+
 const render = (str, pos) => {
   let result = '';
   for (let i = 0; i < pos.length - 1; ++i) {
@@ -42,9 +48,7 @@ const render = (str, pos) => {
 };
 
 const process = () => {
-  const lines = $('#text-editor + label + .tab-content pre').innerHTML
-      .split(/\n|<br\/?>/g)
-      .map(r => r.trim());
+  const lines = getTextArray();
 
   const rendered = [];
   for (const line of lines) {
@@ -65,7 +69,7 @@ const process = () => {
   $('#ruby-rendered-lyrics').innerHTML = title.outerHTML + rendered.join('');
 }
 
-const toFullHTML = (html) => {
+const toFullHTML = (html, text) => {
   const title = $('#ruby-rendered-lyrics h1').textContent;
   return `
       <!DOCTYPE html>
@@ -75,6 +79,9 @@ const toFullHTML = (html) => {
           <title>${title}</title>
       </head>
       <body>
+          <div id="raw-text" style="display: none">
+          ${getTextArray().join('\n')}
+          </div>
           ${html}
       </body>
       </html>
