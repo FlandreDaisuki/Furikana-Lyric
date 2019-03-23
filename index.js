@@ -42,8 +42,8 @@ const render = (str, pos) => {
 };
 
 const process = () => {
-  const lines = $('#text-editor + label + .tab-content pre').textContent
-      .split('\n')
+  const lines = $('#text-editor + label + .tab-content pre').innerHTML
+      .split(/\n|<br\/?>/g)
       .map(r => r.trim());
 
   const rendered = [];
