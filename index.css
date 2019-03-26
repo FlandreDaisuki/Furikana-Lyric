@@ -47,3 +47,13 @@ pre {
 .lyric-row:empty {
     min-height: 1rem;
 }
+
+label[for="text-editor"] + .tab-content > h1.placeholder::after {
+    content: "曲名／歌手";
+    color: #0004;
+}
+
+label[for="text-editor"] + .tab-content > pre.placeholder::after {
+    content: "歌詞(かし)…";
+    color: #0004;
+}

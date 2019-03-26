@@ -99,3 +99,50 @@ $('#download-btn').addEventListener('click',() => {
   const title = $('#ruby-rendered-lyrics h1').textContent;
   saveAs(blob, `${title}.html`.replace(/\//g, '／'));
 });
+
+const teTitle = $('label[for="text-editor"] + .tab-content > h1');
+const tePre = $('label[for="text-editor"] + .tab-content > pre');
+
+window.addEventListener('load', () => {
+  const title = localStorage.getItem('H1');
+  if (title) {
+    teTitle.innerHTML = title;
+  }
+
+  const pre = localStorage.getItem('PRE');
+  if (pre) {
+    tePre.innerHTML = pre;
+  }
+});
+
+const onInputPlaceholder = (event) => {
+  const el = event.target;
+  if (!el.textContent.trim()) {
+    el.innerHTML = '';
+    el.classList.add('placeholder');
+  } else {
+    el.classList.remove('placeholder');
+    localStorage.setItem(el.tagName, el.innerHTML);
+  }
+}
+
+teTitle.addEventListener('input', onInputPlaceholder);
+tePre.addEventListener('input', onInputPlaceholder);
+
+const onPasteClear = (event) => {
+  event.preventDefault();
+
+  const paste = (event.clipboardData || window.clipboardData).getData('text');
+
+  const selection = window.getSelection();
+  if (!selection.rangeCount) { return false };
+  selection.deleteFromDocument();
+  selection.getRangeAt(0).insertNode(document.createTextNode(paste));
+  selection.collapseToEnd();
+
+  const el = event.target;
+  localStorage.setItem(el.tagName, el.innerHTML);
+}
+
+teTitle.addEventListener('paste', onPasteClear);
+tePre.addEventListener('paste', onPasteClear);
