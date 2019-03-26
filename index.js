@@ -106,12 +106,12 @@ const tePre = $('label[for="text-editor"] + .tab-content > pre');
 window.addEventListener('load', () => {
   const title = localStorage.getItem('H1');
   if (title) {
-    teTitle.innerHTML = title;
+    teTitle.innerHTML = LZString.decompressFromBase64(title);
   }
 
   const pre = localStorage.getItem('PRE');
   if (pre) {
-    tePre.innerHTML = pre;
+    tePre.innerHTML = LZString.decompressFromBase64(pre);
   }
 });
 
@@ -122,7 +122,7 @@ const onInputPlaceholder = (event) => {
     el.classList.add('placeholder');
   } else {
     el.classList.remove('placeholder');
-    localStorage.setItem(el.tagName, el.innerHTML);
+    localStorage.setItem(el.tagName, LZString.compressToBase64(el.innerHTML));
   }
 }
 
