@@ -77,6 +77,12 @@ const toFullHTML = (html, text) => {
       <head>
           <meta charset="UTF-8">
           <title>${title}</title>
+          <style>
+          .lyric-row {
+              min-height: 30px;
+              line-height: 2rem;
+          }
+          </style>
       </head>
       <body>
           <div id="raw-text" style="display: none">
