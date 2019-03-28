@@ -1,0 +1,13 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "block-spacing": "error",
+    "brace-style": [ "error", "1tbs", { "allowSingleLine": true } ],
+    "template-curly-spacing": "error",
+    "object-curly-spacing": "error",
+    "semi": "error"
+  }
+}

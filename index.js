@@ -25,7 +25,7 @@ if (!String.prototype.matchAll) {
         }
       }
     };
-  }
+  };
 }
 
 const getTextArray = () => {
@@ -71,10 +71,10 @@ const process = () => {
   const title = $('#text-editor + label + .tab-content h1');
 
   return $smtj(`
-  <h1>${ title.textContent }</h1>
+  <h1>${title.textContent}</h1>
   ${rendered.join('\n')}
   `);
-}
+};
 
 const toFullHTML = () => {
   const title = $('#ruby-rendered-lyrics h1').textContent;
@@ -99,10 +99,10 @@ const toFullHTML = () => {
       </body>
       </html>
   `);
-}
+};
 
 $('#ruby-renderer').addEventListener('change', () => {
-  $('#ruby-rendered-lyrics').innerHTML = process()
+  $('#ruby-rendered-lyrics').innerHTML = process();
 });
 
 new ClipboardJS('#copy-btn', {
@@ -139,7 +139,7 @@ const onInputPlaceholder = (event) => {
     el.classList.remove('placeholder');
     localStorage.setItem(el.tagName, LZString.compressToBase64(el.innerHTML));
   }
-}
+};
 
 teTitle.addEventListener('input', onInputPlaceholder);
 tePre.addEventListener('input', onInputPlaceholder);
@@ -150,14 +150,14 @@ const onPasteClear = (event) => {
   const paste = (event.clipboardData || window.clipboardData).getData('text');
 
   const selection = window.getSelection();
-  if (!selection.rangeCount) { return false };
+  if (!selection.rangeCount) { return false; };
   selection.deleteFromDocument();
   selection.getRangeAt(0).insertNode(document.createTextNode(paste));
   selection.collapseToEnd();
 
   const el = event.target;
   localStorage.setItem(el.tagName, el.innerHTML);
-}
+};
 
 teTitle.addEventListener('paste', onPasteClear);
 tePre.addEventListener('paste', onPasteClear);
