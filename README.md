@@ -6,6 +6,8 @@
 
 Just type with `()`
 
+It has auto cache (in `localStorage`)
+
 ## Ruby HTML
 
 There are two button below.
