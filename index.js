@@ -66,7 +66,7 @@ const process = () => {
   }
   console.log(rendered);
   const title = $('#text-editor + label + .tab-content h1');
-  $('#ruby-rendered-lyrics').innerHTML = title.outerHTML + rendered.join('');
+  $('#ruby-rendered-lyrics').innerHTML = `<h1>${ title.textContent }</h1>` + rendered.join('\n');
 }
 
 const toFullHTML = (html, text) => {
