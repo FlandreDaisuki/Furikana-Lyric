@@ -13,6 +13,8 @@ const $el = (tag, attr = {}, cb = () => {}) => {
   return el;
 };
 
+const $smtj = (str) => str.split('\n').map(s => s.trim()).join('\n');
+
 if (!String.prototype.matchAll) {
   String.prototype.matchAll = function(regexp) {
     const self = this;
@@ -44,6 +46,7 @@ const render = (str, pos) => {
           result += substr;
       }
   }
+
   return `<div class="lyric-row">${result}</div>`;
 };
 
@@ -66,12 +69,16 @@ const process = () => {
   }
   console.log(rendered);
   const title = $('#text-editor + label + .tab-content h1');
-  $('#ruby-rendered-lyrics').innerHTML = `<h1>${ title.textContent }</h1>` + rendered.join('\n');
+
+  return $smtj(`
+  <h1>${ title.textContent }</h1>
+  ${rendered.join('\n')}
+  `);
 }
 
-const toFullHTML = (html, text) => {
+const toFullHTML = () => {
   const title = $('#ruby-rendered-lyrics h1').textContent;
-  return `
+  return $smtj(`
       <!DOCTYPE html>
       <html>
       <head>
@@ -88,20 +95,22 @@ const toFullHTML = (html, text) => {
           <div id="raw-text" style="display: none">
           ${getTextArray().join('\n')}
           </div>
-          ${html}
+          ${process()}
       </body>
       </html>
-  `.split('\n').map(l => l.trim()).join('\n');
+  `);
 }
 
-$('#ruby-renderer').addEventListener('change', process);
+$('#ruby-renderer').addEventListener('change', () => {
+  $('#ruby-rendered-lyrics').innerHTML = process()
+});
 
 new ClipboardJS('#copy-btn', {
   text: () => $('#ruby-rendered-lyrics').outerHTML,
 });
 
 $('#download-btn').addEventListener('click',() => {
-  const blob = new Blob([toFullHTML($('#ruby-rendered-lyrics').outerHTML)], {type: 'text/html;charset=utf-8'});
+  const blob = new Blob([toFullHTML()], {type: 'text/html;charset=utf-8'});
   const title = $('#ruby-rendered-lyrics h1').textContent;
   saveAs(blob, `${title}.html`.replace(/\//g, '／'));
 });
