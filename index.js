@@ -31,7 +31,7 @@ if (!String.prototype.matchAll) {
 const getTextArray = () => {
   return $('#text-editor + label + .tab-content pre').innerHTML
     .split(/\n|<br\/?>/g)
-    .map(r => r.trim());
+    .map(r => r.trim().replace(/（/g ,'(').replace(/）/g ,')'));
 };
 
 const render = (str, pos) => {
@@ -64,7 +64,6 @@ const process = () => {
           collect.add(wordAnchor.index + wordAnchor[0].length);
       }
       const position = [...collect].sort((a, b) => a - b);
-      // console.log(position);
       rendered.push(render(line, position));
   }
   console.log(rendered);
