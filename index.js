@@ -39,9 +39,13 @@ const render = (str, pos) => {
   for (let i = 0; i < pos.length - 1; ++i) {
       const substr = str.slice(pos[i], pos[i + 1]);
       const match = substr.match(/^([^(]+)\(([^)]+)\)$/);
+      const matchFullWidth = substr.match(/^([^（]+)（([^）]+)）$/);
       console.log(substr, match);
+      console.log(substr, matchFullWidth);
       if (match) {
           result += `<ruby>${match[1]}<rp>(</rp><rt>${match[2]}</rt><rp>)</rp></ruby>`;
+      } else if(matchFullWidth) {
+        result += `<ruby>${matchFullWidth[1]}<rp>(</rp><rt>${matchFullWidth[2]}</rt><rp>)</rp></ruby>`;
       } else {
           result += substr;
       }
@@ -58,10 +62,17 @@ const process = () => {
       /* 平仮名 3041-3093 */
       /* 片仮名 30A0-30FF*/
       const lineIter = line.matchAll(/[^\u{3041}-\u{3093}\u{30A0}-\u{30FF}\s「」？?、]+\([^)]+\)/gu);
+      const lineIterFullWidth = line.matchAll(/[^\u{3041}-\u{3093}\u{30A0}-\u{30FF}\s「」？?、（]+（[^）]+）/gu);
       const collect = new Set([0, line.length]);
       for (const wordAnchor of lineIter) {
           collect.add(wordAnchor.index);
           collect.add(wordAnchor.index + wordAnchor[0].length);
+      }
+      if(lineIter === null){
+        for (const wordAnchor of lineIterFullWidth) {
+          collect.add(wordAnchor.index);
+          collect.add(wordAnchor.index + wordAnchor[0].length);
+        }
       }
       const position = [...collect].sort((a, b) => a - b);
       // console.log(position);
