@@ -156,7 +156,7 @@ const onPasteClear = (event) => {
   selection.collapseToEnd();
 
   const el = event.target;
-  localStorage.setItem(el.tagName, el.innerHTML);
+  localStorage.setItem(el.tagName, LZString.compressToBase64(el.innerHTML));
 };
 
 teTitle.addEventListener('paste', onPasteClear);
