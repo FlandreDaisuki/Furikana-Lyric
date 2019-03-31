@@ -31,13 +31,13 @@ if (!String.prototype.matchAll) {
 const getTextArray = () => {
   return $('#text-editor + label + .tab-content pre').innerHTML
     .split(/\n|<br\/?>/g)
-    .map(r => r.trim());
+    .map(r => r.trim().replace(/（/g ,'(').replace(/）/g ,')'));
 };
 
 const render = (str, pos) => {
   let result = '';
   for (let i = 0; i < pos.length - 1; ++i) {
-      const substr = str.replace(/（/g ,'(').replace(/）/g ,')').slice(pos[i], pos[i + 1]);
+      const substr = str.slice(pos[i], pos[i + 1]);
       const match = substr.match(/^([^(]+)\(([^)]+)\)$/);
       console.log(substr, match);
       if (match) {
@@ -57,7 +57,7 @@ const process = () => {
   for (const line of lines) {
       /* 平仮名 3041-3093 */
       /* 片仮名 30A0-30FF*/
-      const lineIter = line.replace(/（/g ,'(').replace(/）/g ,')').matchAll(/[^\u{3041}-\u{3093}\u{30A0}-\u{30FF}\s「」？?、]+\([^)]+\)/gu);
+      const lineIter = line.matchAll(/[^\u{3041}-\u{3093}\u{30A0}-\u{30FF}\s「」？?、]+\([^)]+\)/gu);
       const collect = new Set([0, line.length]);
       for (const wordAnchor of lineIter) {
           collect.add(wordAnchor.index);
