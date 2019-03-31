@@ -4,7 +4,7 @@
 
 ## Text Editor
 
-Just type with `()`
+Just type with `()` or `（）`
 
 It has auto cache (in `localStorage`)
 
