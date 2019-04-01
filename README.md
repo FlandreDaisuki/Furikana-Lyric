@@ -1,6 +1,6 @@
-# JP-Lyric-with-Ruby
+# Furikana-Lyric
 
-打日文歌詞省點力
+Type furikana into lyric easier.
 
 ## Text Editor
 
