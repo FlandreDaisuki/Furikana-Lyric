@@ -49,7 +49,7 @@ const render = (str, pos) => {
   let isMatchJapanese = result.indexOf('<ruby') != -1;
   
   if(isMatchJapanese) {
-    return `<div class="lyric-row-jp">${result}</div>`;
+    return `<div class="lyric-row.japanese">${result}</div>`;
   } else {
     return `<div class="lyric-row">${result}</div>`;
   }
@@ -94,7 +94,7 @@ const toFullHTML = () => {
               line-height: 2rem;
               color: #AAA;
           }
-          .lyric-row-jp {
+          .lyric-row-japanese {
             min-height: 30px;
             line-height: 2rem;
           }
