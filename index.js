@@ -46,8 +46,13 @@ const render = (str, pos) => {
           result += substr;
       }
   }
-
-  return `<div class="lyric-row">${result}</div>`;
+  const isMatchJapanese = result.includes('<ruby>');
+  
+  if(isMatchJapanese) {
+    return `<div class="lyric-row japanese">${result}</div>`;
+  } else {
+    return `<div class="lyric-row">${result}</div>`;
+  }
 };
 
 const process = () => {
