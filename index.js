@@ -93,10 +93,6 @@ const toFullHTML = () => {
               min-height: 30px;
               line-height: 2rem;
           }
-          .lyric-row.japanese {
-            min-height: 30px;
-            line-height: 2rem;
-          }
           </style>
       </head>
       <body>
