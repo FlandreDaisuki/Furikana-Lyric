@@ -92,7 +92,7 @@ const toFullHTML = () => {
           .lyric-row {
               min-height: 30px;
               line-height: 2rem;
-          }s
+          }
           </style>
       </head>
       <body>
