@@ -46,8 +46,13 @@ const render = (str, pos) => {
           result += substr;
       }
   }
-
-  return `<div class="lyric-row">${result}</div>`;
+  let isMatchJapanese = result.indexOf('<ruby') != -1;
+  
+  if(isMatchJapanese) {
+    return `<div class="lyric-row-jp">${result}</div>`;
+  } else {
+    return `<div class="lyric-row">${result}</div>`;
+  }
 };
 
 const process = () => {
@@ -87,6 +92,11 @@ const toFullHTML = () => {
           .lyric-row {
               min-height: 30px;
               line-height: 2rem;
+              color: #AAA;
+          }
+          .lyric-row-jp {
+            min-height: 30px;
+            line-height: 2rem;
           }
           </style>
       </head>
